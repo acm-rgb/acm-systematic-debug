@@ -1,11 +1,11 @@
 # acm-debug
 
-A Claude Code skill that performs systematic code debugging. It reads your file, works through every category of bug — critical errors, logic errors, potential issues, and code quality — and returns a structured report with line numbers, explanations, and ready-to-use fixes.
+A Claude Code slash command for systematic code debugging. It reads your file, works through every category of bug — critical errors, logic errors, potential issues, and code quality — and returns a structured report with line numbers, explanations, and ready-to-use fixes.
 
 ## What it does
 
 | Category | Examples |
-|----------|---------|
+| -------- | -------- |
 | 🔴 **Critical Errors** | Null dereferences, unhandled exceptions, infinite loops, race conditions |
 | 🟡 **Logic Errors** | Off-by-one, inverted conditions, wrong operator precedence, float comparisons |
 | 🟠 **Potential Issues** | Division by zero, missing input validation, resource leaks, injection vulnerabilities |
@@ -25,7 +25,8 @@ Supports any language Claude Code can read: Python, JavaScript/TypeScript, Go, R
 
 ### Option A — One-liner (recommended)
 
-**macOS / Linux**
+#### macOS / Linux
+
 ```bash
 git clone https://github.com/acm-rgb/acm-systematic-debug.git
 cd acm-systematic-debug
@@ -41,7 +42,8 @@ chmod +x install.sh
 ./install.sh --project /path/to/your/project
 ```
 
-**Windows (PowerShell)**
+#### Windows (PowerShell)
+
 ```powershell
 git clone https://github.com/acm-rgb/acm-systematic-debug.git
 cd acm-systematic-debug
@@ -60,7 +62,7 @@ cd acm-systematic-debug
 
 Copy `commands/debug.md` into the `.claude/commands/` directory of your project:
 
-```
+```text
 your-project/
 └── .claude/
     └── commands/
@@ -68,6 +70,7 @@ your-project/
 ```
 
 For global installation (available in all projects), copy it to:
+
 - macOS/Linux: `~/.claude/commands/debug.md`
 - Windows: `%USERPROFILE%\.claude\commands\debug.md`
 
@@ -77,14 +80,14 @@ For global installation (available in all projects), copy it to:
 
 Once installed, open Claude Code inside your project and use the `/debug` command:
 
-```
+```text
 /debug src/auth.py
 ```
 
 ### Flags
 
 | Flag | Description |
-|------|-------------|
+| ---- | ----------- |
 | _(none)_ | Full report — all four categories |
 | `--quick` | Only Critical and Logic errors (faster for large files) |
 | `--fix` | Full report + auto-apply Critical and Logic fixes to the file |
@@ -110,7 +113,7 @@ Once installed, open Claude Code inside your project and use the `/debug` comman
 
 ## Output format
 
-```
+```text
 ## Debug Report: `src/auth.py`
 
 Language detected: Python
@@ -148,7 +151,7 @@ The file implements JWT authentication. Found 2 critical errors, 1 logic error,
 
 ## How it works
 
-The skill is a single markdown file (`.claude/commands/debug.md`) that Claude Code loads when you type `/debug`. It instructs Claude to:
+`acm-debug` is a single markdown file (`.claude/commands/debug.md`) that Claude Code loads as a slash command when you type `/debug`. It instructs Claude to:
 
 1. Read the target file
 2. Walk through each bug category systematically
